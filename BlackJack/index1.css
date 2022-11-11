@@ -1,0 +1,29 @@
+h1 {
+    color: goldenrod
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    text-align: center ;
+    color: black;
+    font-weight: bold;
+}
+
+#message-el{
+    font-style: italic;
+}
+
+button { 
+    color: #016f32;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 15px;
+    width: 110px;
+    background: goldenrod;
+    border: none;
+    border-radius: 40px;
+    font-weight: bold;
+} 
+button:hover{
+    color: #2020ff
+}
