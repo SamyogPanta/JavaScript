@@ -9,6 +9,8 @@ let message = ""
 let messageEl= document.getElementById("message-el")
 let cardEl = document.querySelector("#card-el")
 let sumEl = document.querySelector("#sum-el")
+let newEl = document.getElementById("new-el")
+let addcardEl = document.getElementById("addcard-el")
 
 
 
@@ -17,17 +19,19 @@ function randomCard(){
     card = myList[Math.floor(Math.random() * 14)]
     return card
 }
-
+    let firstCard = randomCard()
+    let secondCard = randomCard()
 
 
 function startGame(){
 
-    let firstCard = randomCard()
-    let secondCard = randomCard()
+/*     let firstCard = randomCard()
+    let secondCard = randomCard() */
     let sum = firstCard + secondCard
 
     if( sum <= 20){
         message = ("Do you want to draw new card ?")
+        
     
     }
     else if (sum === 21){
@@ -46,5 +50,16 @@ function startGame(){
 
 }
 
+function newGame(){
+ firstCard = randomCard()
+ secondCard = randomCard()
+ startGame()
+}
 
+function addCard(){
+    let additionalCard = randomCard()
+    cardEl.textContent += ", " +  additionalCard
+    sum += additionalCard
+    sumEl.textContent = "Sum: " + sum
+}
 
