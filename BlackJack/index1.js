@@ -1,65 +1,65 @@
-var myList = [1,2,3,4,5,6,7,8,9,10,11,10,10,10]
-Math.floor(Math.random() * 14);
-
-let hasBlackCard = false
-let isAlive = true
-
-let message = ""
-
-let messageEl= document.getElementById("message-el")
-let cardEl = document.querySelector("#card-el")
-let sumEl = document.querySelector("#sum-el")
-let newEl = document.getElementById("new-el")
-let addcardEl = document.getElementById("addcard-el")
-
-
-
-function randomCard(){
-    let card = 0
-    card = myList[Math.floor(Math.random() * 14)]
-    return card
+let player = {
+    name: "Samyog",
+    chips: 200
 }
-    let firstCard = randomCard()
-    let secondCard = randomCard()
 
+let cards = []
+let sum = 0
+let hasBlackJack = false
+let isAlive = false
+let message = ""
+let messageEl = document.getElementById("message-el")
+let sumEl = document.getElementById("sum-el")
+let cardsEl = document.getElementById("cards-el")
+let playerEl = document.getElementById("player-el")
 
-function startGame(){
+playerEl.textContent = player.name + ": $" + player.chips
 
-/*     let firstCard = randomCard()
-    let secondCard = randomCard() */
-    let sum = firstCard + secondCard
-
-    if( sum <= 20){
-        message = ("Do you want to draw new card ?")
-        
-    
+function getRandomCard() {
+    let randomNumber = Math.floor( Math.random()*13 ) + 1
+    if (randomNumber > 10) {
+        return 10
+    } else if (randomNumber === 1) {
+        return 11
+    } else {
+        return randomNumber
     }
-    else if (sum === 21){
-        message = ("Wohoo! You've hot Blackjack!")
-        hasBlackCard = true
-    } 
-    else if(sum >= 22) {
-        message = ("You're out of the game!")
+}
+
+function startGame() {
+    isAlive = true
+    let firstCard = getRandomCard()
+    let secondCard = getRandomCard()
+    cards = [firstCard, secondCard]
+    sum = firstCard + secondCard
+    renderGame()
+}
+
+function renderGame() {
+    cardsEl.textContent = "Cards: "
+    for (let i = 0; i < cards.length; i++) {
+        cardsEl.textContent += cards[i] + " "
+    }
+    
+    sumEl.textContent = "Sum: " + sum
+    if (sum <= 20) {
+        message = "Do you want to draw a new card?"
+    } else if (sum === 21) {
+        message = "You've got Blackjack!"
+        hasBlackJack = true
+    } else {
+        message = "You're out of the game!"
         isAlive = false
     }
-    
     messageEl.textContent = message
-
-    sumEl.textContent = "Sum: " + sum
-    cardEl.textContent = "Cards: " + firstCard + " , " + secondCard
-
 }
 
-function newGame(){
- firstCard = randomCard()
- secondCard = randomCard()
- startGame()
-}
 
-function addCard(){
-    let additionalCard = randomCard()
-    cardEl.textContent += ", " +  additionalCard
-    sum += additionalCard
-    sumEl.textContent = "Sum: " + sum
+function newCard() {
+    if (isAlive === true && hasBlackJack === false) {
+        let card = getRandomCard()
+        sum += card
+        cards.push(card)
+        renderGame()        
+    }
 }
-
